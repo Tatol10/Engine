@@ -67,13 +67,14 @@ void scroll_callback(GLFWwindow* win, double xoffset, double yoffset)
 	else if (fov >= 90.0f)
 		fov = 89.0f;
 	
-	_projectionMatrix = glm::perspective(glm::radians(fov), _getAspectRatio, 1.0f, 100.0f);
-
+	_projectionMatrix = glm::perspective(glm::radians(fov), _getAspectRatio, 1.0f, 1000.0f);
 }
+
 
 float Camera::FieldOfView() {
 	return fov;
 }
+
 Camera::Camera(GLFWwindow* window)
 {
 	
@@ -81,6 +82,7 @@ Camera::Camera(GLFWwindow* window)
 
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
+
 
 	_firstMouse = true;
 	_lastX = 0.0f;
@@ -133,6 +135,11 @@ void Camera::CameraMoveForward(float speed)
 	UpdateViewMatrix();
 }
 
+void Camera::CameraMoveLeft(float speed)
+{
+	_cameraPos -= glm::normalize(glm::cross(_cameraDir, _cameraUp)) * speed;
+	UpdateViewMatrix();
+}
 
 void Camera::CameraTranslate(float x, float y, float z)
 {

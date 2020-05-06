@@ -6,24 +6,38 @@
 #include "Tilemap.h"
 #include "CollisionManager.h"
 #include "Input.h"
+#include "Camera.h"
+#include "Shader3D.h"
+#include "Model.h"
+
 #include <iostream>
 
 class Game : public GameBase {
 private:
-	int i;
-	Sprite* pollo;
-	Sprite* muchacho;
-	Sprite* cuadradito;
+	float i;
+	//Entity* pollo;
+	//Sprite* muchacho;
+	//Sprite* cuadradito;
 
-	Tilemap* myLevel;
+	//Tilemap* myLevel;
 
-	Triangle* triangle;
+	//Triangle* triangle;
 
-	Material * material1;
-	Material * material3;
-
+	//Material * material1;
+	//Material * material3;
+	Camera* cam;
 	Input * inp;
 	
+	Shader3D* shader;
+	Shader3D* lightingShader;
+	//Shader3D* lightShader;
+
+	Model* ourModel;
+
+	bool light=true;
+	bool hold = false;
+	glm::vec3 holdPosition;
+
 public:
 	Game();
 	~Game();
